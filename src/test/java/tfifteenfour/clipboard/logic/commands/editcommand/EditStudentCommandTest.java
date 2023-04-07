@@ -31,11 +31,14 @@ import tfifteenfour.clipboard.testutil.TypicalModel;
  */
 public class EditStudentCommandTest {
 
-    private Model model = new TypicalModel().getTypicalModel();
-    private Group actualSelectedGroup = model.getCurrentSelection().getSelectedGroup();
-//    private Model model;
-//    private Group actualSelectedGroup;
-    private Student typicalStudent = model.getCurrentSelection().getSelectedStudent();
+//    private Model model = new TypicalModel().getTypicalModel();
+//    private Group actualSelectedGroup = model.getCurrentSelection().getSelectedGroup();
+//private Student typicalStudent = model.getCurrentSelection().getSelectedStudent();
+
+
+    private Model model;
+    private Group actualSelectedGroup;
+    private Student typicalStudent;
 
 
     @BeforeEach
@@ -47,8 +50,9 @@ public class EditStudentCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
+        Model model = new TypicalModel().getTypicalModel();
 //        Student editedStudent = model.getCurrentSelection().getSelectedStudent();
-//        model = new TypicalModel().getTypicalModel();
+        Student typicalStudent = model.getCurrentSelection().getSelectedStudent();
 
         Student editedStudent = new StudentBuilder(typicalStudent).build();
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder(editedStudent).build();

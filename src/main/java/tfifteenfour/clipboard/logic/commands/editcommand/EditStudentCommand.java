@@ -92,15 +92,6 @@ public class EditStudentCommand extends EditCommand {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-
-        for (Session session : sessions) {
-            session.replaceStudent(studentToEdit, editedStudent);
-        }
-
-        for (Task task : tasks) {
-            task.replaceStudent(studentToEdit, editedStudent);
-        }
-
         selectedGroup.setStudent(studentToEdit, editedStudent);
         return new CommandResult(this, String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedStudent), willModifyState);
     }
@@ -109,7 +100,7 @@ public class EditStudentCommand extends EditCommand {
      * Creates and returns a {@code Student} with the details of {@code studentToEdit}
      * edited with {@code editStudentDescriptor}.
      */
-    private static Student createEditedStudent(Student studentToEdit, EditStudentDescriptor editStudentDescriptor) {
+    static Student createEditedStudent(Student studentToEdit, EditStudentDescriptor editStudentDescriptor) {
         assert studentToEdit != null;
 
         Name updatedName = editStudentDescriptor.getName().orElse(studentToEdit.getName());

@@ -209,6 +209,14 @@ public class Group {
 
     public void setStudent(Student studentToReplace, Student newStudent) {
         this.students.set(studentToReplace, newStudent);
+
+        for (Session session : sessions) {
+            session.replaceStudent(studentToReplace, newStudent);
+        }
+
+        for (Task task : tasks) {
+            task.replaceStudent(studentToReplace, newStudent);
+        }
     }
 
     /**

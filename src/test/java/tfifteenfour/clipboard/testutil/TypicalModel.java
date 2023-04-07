@@ -1,10 +1,7 @@
 package tfifteenfour.clipboard.testutil;
 
 import java.io.InputStream;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
-import tfifteenfour.clipboard.MainApp;
 import tfifteenfour.clipboard.logic.CurrentSelection;
 import tfifteenfour.clipboard.logic.PageType;
 import tfifteenfour.clipboard.model.Model;
@@ -17,8 +14,8 @@ import tfifteenfour.clipboard.model.util.SampleDataUtil;
  * A utility class containing a list of {@code Student} objects to be used in tests.
  */
 public class TypicalModel {
-        private static Path sampleFilePath = Paths.get("data", "sampleRoster.json");
-        private static InputStream sampleResourceStream = MainApp.class.getResourceAsStream("/assets/sampleRoster.json");
+//        private static Path sampleFilePath = Paths.get("data", "sampleRoster.json");
+        private static InputStream sampleResourceStream = TypicalModel.class.getResourceAsStream("/assets/sampleRoster.json");
         private Model typicalModel;
 
 
@@ -37,7 +34,8 @@ public class TypicalModel {
         }
 
         private static Roster getTypicalRoster() {
-                return new Roster(SampleDataUtil.getTypicalRoster(sampleResourceStream));
+                Roster tmp = new Roster(SampleDataUtil.getTypicalRoster(sampleResourceStream));
+                return tmp;
 //                return new Roster(SampleDataUtil.getSampleRoster(sampleFilePath, sampleResourceStream));
         }
 
