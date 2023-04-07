@@ -5,9 +5,11 @@ title: User Guide
 
 ## Introduction
 
-CLIpboard is a desktop app that helps educators (like you!), especially those that tutor multiple classes, by managing their students’ particulars<strong> in an organised manner.</strong>
+CLIpboard is a desktop app that helps educators (like you!), especially those that tutor multiple classes, by managing
+their students’ particulars<strong> in an organised manner.</strong>
 
-CLIpboard is designed to work efficiently through typing keyword commands and also has a user-friendly interface with graphical elements. It can get your student management tasks done faster than traditional apps. 
+CLIpboard is designed to work efficiently through typing keyword commands and also has a user-friendly interface with
+graphical elements. It can get your student management tasks done faster than traditional apps.
 
 CLIpboard is optimised for keyboard users, so if you can type fast, CLIpboard can work even faster.
 
@@ -72,7 +74,7 @@ product effectively.
 2. Navigation Route
    * You can view what courses and groups you have selected, and what page you are currently on here.
 3. Navigation Tabs
-   * Compared to the Navigation Route, the Navigation Tabs give you a quick overview on what type of page you are currently on. 
+   * Compared to the Navigation Route, the Navigation Tabs give you a quick overview on what type of page you are currently on.
    * Refer to the [<i>Figure 3</i>](#navigation-guide) below for the Navigation Guide on the different pages in CLIpboard.
 4. Command Box
    * Here is where you will type in your commands.
