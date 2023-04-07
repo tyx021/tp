@@ -1,19 +1,13 @@
 package tfifteenfour.clipboard.testutil;
 
-import static tfifteenfour.clipboard.logic.parser.CliSyntax.PREFIX_COURSE;
 import static tfifteenfour.clipboard.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static tfifteenfour.clipboard.logic.parser.CliSyntax.PREFIX_NAME;
 import static tfifteenfour.clipboard.logic.parser.CliSyntax.PREFIX_PHONE;
 import static tfifteenfour.clipboard.logic.parser.CliSyntax.PREFIX_STUDENTID;
-import static tfifteenfour.clipboard.logic.parser.CliSyntax.PREFIX_TAG;
-
-import java.util.Set;
 
 import tfifteenfour.clipboard.logic.commands.addcommand.AddCommand;
-import tfifteenfour.clipboard.logic.commands.studentcommands.EditCommand.EditStudentDescriptor;
-import tfifteenfour.clipboard.model.course.Course;
+import tfifteenfour.clipboard.logic.parser.EditCommandParser.EditStudentDescriptor;
 import tfifteenfour.clipboard.model.student.Student;
-import tfifteenfour.clipboard.model.tag.Tag;
 
 /**
  * A utility class for Student.
@@ -55,17 +49,6 @@ public class StudentUtil {
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getStudentId().ifPresent(address -> sb.append(PREFIX_STUDENTID).append(address.value).append(" "));
 
-        Set<Course> modules = descriptor.getModules().get();
-        modules.forEach(s -> sb.append(PREFIX_COURSE).append(s.courseCode).append(" "));
-
-        if (descriptor.getTags().isPresent()) {
-            Set<Tag> tags = descriptor.getTags().get();
-            if (tags.isEmpty()) {
-                sb.append(PREFIX_TAG);
-            } else {
-                tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
-            }
-        }
         return sb.toString();
     }
 }
