@@ -67,10 +67,6 @@ public class SampleDataUtil {
             String contents = reader.lines()
                     .collect(Collectors.joining(System.lineSeparator()));
 
-            // Write json String into /data/sampleRoster.json
-            // Create a roster from /data/sampleRoster.json
-//            SerializedRoster jsonSampleRoster = mapper.readValue(file, SerializedRoster.class);
-//            typicalRoster = jsonToRoster(jsonSampleRoster);
             // Parse the JSON string and convert it into a SerializedRoster object
             ObjectMapper mapper = new ObjectMapper();
             SerializedRoster jsonSampleRoster = mapper.readValue(contents, SerializedRoster.class);

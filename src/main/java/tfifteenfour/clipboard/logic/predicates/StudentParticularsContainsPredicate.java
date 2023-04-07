@@ -20,10 +20,10 @@ public class StudentParticularsContainsPredicate implements Predicate<Student> {
     public boolean test(Student student) {
         return keywords.stream()
                 .anyMatch(keyword -> student.getStudentId()
-                .toString().toLowerCase().contains(keyword.toLowerCase())) ||
-                keywords.stream()
-                .anyMatch(keyword -> student.getName()
-                .toString().toLowerCase().contains(keyword.toLowerCase()));
+                        .toString().toLowerCase().contains(keyword.toLowerCase()))
+                || keywords.stream()
+                        .anyMatch(keyword -> student.getName()
+                                .toString().toLowerCase().contains(keyword.toLowerCase()));
     }
 
     @Override
