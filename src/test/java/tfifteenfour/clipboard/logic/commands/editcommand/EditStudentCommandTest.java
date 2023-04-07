@@ -12,6 +12,7 @@ import static tfifteenfour.clipboard.logic.commands.CommandTestUtil.showStudentA
 import static tfifteenfour.clipboard.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static tfifteenfour.clipboard.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import tfifteenfour.clipboard.commons.core.Messages;
@@ -32,10 +33,24 @@ public class EditStudentCommandTest {
 
     private Model model = new TypicalModel().getTypicalModel();
     private Group actualSelectedGroup = model.getCurrentSelection().getSelectedGroup();
+//    private Model model;
+//    private Group actualSelectedGroup;
+    private Student typicalStudent = model.getCurrentSelection().getSelectedStudent();
+
+
+    @BeforeEach
+    void setUp() {
+        model = new TypicalModel().getTypicalModel();
+        actualSelectedGroup = model.getCurrentSelection().getSelectedGroup();
+        typicalStudent = model.getCurrentSelection().getSelectedStudent();
+    }
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Student editedStudent = new StudentBuilder().build();
+//        Student editedStudent = model.getCurrentSelection().getSelectedStudent();
+//        model = new TypicalModel().getTypicalModel();
+
+        Student editedStudent = new StudentBuilder(typicalStudent).build();
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder(editedStudent).build();
         EditStudentCommand editStudentCommand = new EditStudentCommand(INDEX_FIRST_PERSON, descriptor);
 
@@ -52,6 +67,8 @@ public class EditStudentCommandTest {
 
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
+        model = new TypicalModel().getTypicalModel();
+
         Index indexLastStudent = Index.fromOneBased(actualSelectedGroup.getUnmodifiableStudentList().size());
         Student lastStudent = actualSelectedGroup.getUnmodifiableStudentList().get(indexLastStudent.getZeroBased());
 
@@ -67,7 +84,7 @@ public class EditStudentCommandTest {
         Model expectedModel = model.copy();
 
         Group expectedSelectedGroup = expectedModel.getCurrentSelection().getSelectedGroup();
-        expectedSelectedGroup.setStudent(expectedSelectedGroup.getUnmodifiableFilteredStudentList().get(0), editedStudent);
+        expectedSelectedGroup.setStudent(expectedSelectedGroup.getUnmodifiableFilteredStudentList().get(indexLastStudent.getZeroBased()), editedStudent);
 
         assertCommandSuccess(editStudentCommand, model, expectedMessage, expectedModel);
     }

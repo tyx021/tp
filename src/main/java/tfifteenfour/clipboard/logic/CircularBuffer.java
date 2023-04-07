@@ -18,6 +18,7 @@ public class CircularBuffer<T> {
      *
      * @param size the size of the buffer
      */
+    @SuppressWarnings("unchecked")
     public CircularBuffer(int maxSize) {
         this.buffer = (T[]) new Object[maxSize];
         this.maxSize = maxSize;

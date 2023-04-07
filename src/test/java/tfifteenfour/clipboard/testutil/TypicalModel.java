@@ -4,7 +4,9 @@ import java.io.InputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import tfifteenfour.clipboard.MainApp;
 import tfifteenfour.clipboard.logic.CurrentSelection;
+import tfifteenfour.clipboard.logic.PageType;
 import tfifteenfour.clipboard.model.Model;
 import tfifteenfour.clipboard.model.ModelManager;
 import tfifteenfour.clipboard.model.Roster;
@@ -16,7 +18,7 @@ import tfifteenfour.clipboard.model.util.SampleDataUtil;
  */
 public class TypicalModel {
         private static Path sampleFilePath = Paths.get("data", "sampleRoster.json");
-        private static InputStream sampleResourceStream = TypicalModel.class.getClass().getResourceAsStream("/assets/sampleRoster.json");
+        private static InputStream sampleResourceStream = MainApp.class.getResourceAsStream("/assets/sampleRoster.json");
         private Model typicalModel;
 
 
@@ -24,21 +26,23 @@ public class TypicalModel {
                 Roster typicalRoster = getTypicalRoster();
                 CurrentSelection typicalCurrentSelection = new CurrentSelection();
 
-                typicalCurrentSelection.selectCourse(getTypicalRoster().getUnmodifiableCourseList().get(0));
+                typicalCurrentSelection.selectCourse(typicalRoster.getUnmodifiableCourseList().get(0));
                 typicalCurrentSelection.selectGroup(typicalCurrentSelection.getSelectedCourse().getUnmodifiableGroupList().get(0));
                 typicalCurrentSelection.selectStudent(typicalCurrentSelection.getSelectedGroup().getUnmodifiableFilteredStudentList().get(0));
                 typicalCurrentSelection.selectSession(typicalCurrentSelection.getSelectedGroup().getUnmodifiableFilteredSessionList().get(0));
                 typicalCurrentSelection.selectTask(typicalCurrentSelection.getSelectedGroup().getUnmodifiableTaskList().get(0));
 
-                this.typicalModel = new ModelManager(typicalRoster, new UserPrefs(),typicalCurrentSelection);
+                typicalCurrentSelection.setCurrentPage(PageType.STUDENT_PAGE);
+                this.typicalModel = new ModelManager(typicalRoster, new UserPrefs());
         }
 
         private static Roster getTypicalRoster() {
-                return new Roster(SampleDataUtil.getSampleRoster(sampleFilePath, sampleResourceStream));
+                return new Roster(SampleDataUtil.getTypicalRoster(sampleResourceStream));
+//                return new Roster(SampleDataUtil.getSampleRoster(sampleFilePath, sampleResourceStream));
         }
 
         public Model getTypicalModel() {
-                return this.typicalModel;
+                return this.typicalModel.copy();
         }
 
 

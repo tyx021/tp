@@ -58,6 +58,34 @@ public class SampleDataUtil {
         return sampleRoster;
     }
 
+    public static Roster getTypicalRoster(InputStream sampleResourceStream) {
+        Roster typicalRoster = new Roster();
+
+        try {
+            // Read json String from the json file stored in /resources/assets
+            BufferedReader reader = new BufferedReader(new InputStreamReader(sampleResourceStream));
+            String contents = reader.lines()
+                    .collect(Collectors.joining(System.lineSeparator()));
+
+            // Write json String into /data/sampleRoster.json
+            // Create a roster from /data/sampleRoster.json
+//            SerializedRoster jsonSampleRoster = mapper.readValue(file, SerializedRoster.class);
+//            typicalRoster = jsonToRoster(jsonSampleRoster);
+            // Parse the JSON string and convert it into a SerializedRoster object
+            ObjectMapper mapper = new ObjectMapper();
+            SerializedRoster jsonSampleRoster = mapper.readValue(contents, SerializedRoster.class);
+
+            // Convert the SerializedRoster object into a Roster object
+            typicalRoster = jsonToRoster(jsonSampleRoster);
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return typicalRoster;
+    }
+
     /**
      * Returns a tag set containing the list of strings given.
      */
